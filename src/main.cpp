@@ -1,9 +1,12 @@
-#include "tree.h"
 #include <iostream>
+#include <windows.h>
+#include "Pattern.h"
 using namespace std;
 
 int main() {
-    Tree t;
-    t.print();
+    Pattern p;
+    wstring pattern = L"مفعول";
+    wcout<<pattern<<endl;
+    wcout<<p.TransformationRule(pattern);
     return 0;
 }
