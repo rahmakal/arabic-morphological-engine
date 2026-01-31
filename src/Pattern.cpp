@@ -1,14 +1,17 @@
-#include <algorithm>
 #include "Pattern.h"
 #include <string>
-#include <iostream>
+#include <codecvt>
+#include <locale>
 using namespace std;
 string Pattern::TransformationRule(string key)
 {
+
+    wstring_convert<codecvt_utf8<wchar_t>> conv;
+    wstring wkey = conv.from_bytes(key);
+
     wstring rule = L"";
-    for (wchar_t c:key)
+    for (auto c:wkey)
     {
-        wcout<<c<<endl;
         if (c == L'ف' || c == L'ع' || c == L'ل')
         {
             rule+='*';
@@ -17,6 +20,5 @@ string Pattern::TransformationRule(string key)
             rule+=c;
         }
     }
-    reverse(rule.begin(), rule.end());
-    return rule;
+    return conv.to_bytes(rule);
 }
