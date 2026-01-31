@@ -1,0 +1,27 @@
+#include "DerivedWordList.h"
+
+using namespace std;
+
+void DerivedWordList::addWord(const string& word, const string& pattern) {
+    for (auto& w : words) {
+        if (w.word == word) {
+            w.frequency++;
+            return;
+        }
+    }
+    words.emplace_back(word, pattern);
+}
+
+bool DerivedWordList::exists(const string& word) const {
+    for (const auto& w : words) {
+        if (w.word == word)
+            return true;
+    }
+    return false;
+}
+
+void DerivedWordList::display() const {
+    for (const auto& w : words) {
+        cout << w.word << " (" << w.pattern << ", " << w.frequency << ")" << endl;
+    }
+}
