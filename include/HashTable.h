@@ -11,7 +11,6 @@ public:
     void insert(string key, Pattern value);
     Pattern search(string key);
 private:
-    string key;
     vector<Pattern> values;
 
 };

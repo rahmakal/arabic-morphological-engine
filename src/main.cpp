@@ -1,11 +1,13 @@
 #include <iostream>
+
+#include "HashTable.h"
 #include "Pattern.h"
 using namespace std;
 
 int main() {
     Pattern p;
     string pattern = "مفعول";
-    cout<<pattern<<endl;
-    cout<<p.TransformationRule(pattern);
+    HashTable mp;
+    mp.insert(pattern, p);
     return 0;
 }

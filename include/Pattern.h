@@ -5,9 +5,11 @@ using namespace std;
 class Pattern
 {
 public:
-    string TransformationRule(string key);
+    Pattern();
+    void TransformationRule(string key);
+    string transformed_word();
 private:
-
+    string transformed_word_;
 };
 
 

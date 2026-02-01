@@ -3,7 +3,11 @@
 #include <codecvt>
 #include <locale>
 using namespace std;
-string Pattern::TransformationRule(string key)
+Pattern::Pattern()
+{
+    transformed_word_ = "";
+}
+void Pattern::TransformationRule(string key)
 {
 
     wstring_convert<codecvt_utf8<wchar_t>> conv;
@@ -20,5 +24,10 @@ string Pattern::TransformationRule(string key)
             rule+=c;
         }
     }
-    return conv.to_bytes(rule);
+    transformed_word_ = conv.to_bytes(rule);
+}
+
+string Pattern::transformed_word()
+{
+    return transformed_word_;
 }
