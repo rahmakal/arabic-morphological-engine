@@ -10,6 +10,9 @@ public:
     HashTable();
     void insert(string key, Pattern value);
     Pattern search(string key);
+    void modify(string key, string new_key);
+    void delete_key(string key);
+    void show_hash_table();
 private:
     vector<Pattern> values;
     int find_index(string key);
