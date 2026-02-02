@@ -12,6 +12,7 @@ public:
     Pattern search(string key);
 private:
     vector<Pattern> values;
+    int find_index(string key);
 
 };
 
