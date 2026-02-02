@@ -27,6 +27,7 @@ public:
     void insertRoot(const string& root);
     RootNode* searchRoot(const string& root) const;
     void displayRoots() const;
+    void insertRootsFromFile(const string& filename);
 };
 
 #endif

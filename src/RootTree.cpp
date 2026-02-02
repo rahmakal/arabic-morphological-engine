@@ -1,4 +1,6 @@
 #include "RootTree.h"
+#include <fstream>
+#include <string>
 
 using namespace std;
 
@@ -102,3 +104,20 @@ RootNode* RootTree::searchRoot(const string& root) const {
 void RootTree::displayRoots() const {
     inorder(this->root);
 }
+
+void RootTree::insertRootsFromFile(const string& filename) {
+    ifstream file(filename);
+    if (!file) {
+        cerr << "Error opening file: " << filename << endl;
+        return;
+    }
+
+    string root;
+    while (getline(file, root)) {
+        if (!root.empty()) {
+            insertRoot(root);
+        }
+    }
+
+    file.close();
+}   
