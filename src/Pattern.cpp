@@ -1,4 +1,5 @@
 #include "Pattern.h"
+#include <iostream>
 #include <string>
 #include <codecvt>
 #include <locale>
@@ -30,4 +31,22 @@ void Pattern::TransformationRule(string key)
 string Pattern::transformed_word()
 {
     return transformed_word_;
+}
+
+string Pattern::generate_word(const string& word)
+{
+    wstring_convert<codecvt_utf8<wchar_t>> conv;
+    wstring generated = L"";
+    wstring w_word= conv.from_bytes(word);
+    wstring w_transformed_ = conv.from_bytes(transformed_word_);
+    size_t word_index = 0;
+    for (auto c : w_transformed_) {
+        if (c == '*') {
+            generated += w_word[word_index++];
+        } else {
+            generated += c;
+        }
+    }
+
+    return conv.to_bytes(generated);
 }
