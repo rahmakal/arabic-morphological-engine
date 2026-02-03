@@ -19,7 +19,7 @@ private:
 
     RootNode* insert(RootNode* node, const string& root);
     RootNode* search(RootNode* node, const string& root) const;
-    void inorder(RootNode* node) const;
+    void display_tree(int level, RootNode* node) const;
 
 public:
     RootTree();

@@ -84,13 +84,18 @@ RootNode* RootTree::search(RootNode* node, const string& root) const {
     return search(node->right, root);
 }
 
-void RootTree::inorder(RootNode* node) const {
-    if (!node)
-        return;
-
-    inorder(node->left);
-    cout << node->root << endl;
-    inorder(node->right);
+void RootTree::display_tree(int level, RootNode* node) const {
+    if (node != NULL)
+    {
+        display_tree(level + 1, node->right);
+        cout << endl;
+        if (node == this->root)
+            cout << "Root -> ";
+        for (int i = 0; i < level && node != this->root; i++)
+            cout << "        ";
+        cout << node->root;
+        display_tree(level + 1, node->left);
+    }
 }
 
 void RootTree::insertRoot(const string& root) {
@@ -102,7 +107,7 @@ RootNode* RootTree::searchRoot(const string& root) const {
 }
 
 void RootTree::displayRoots() const {
-    inorder(this->root);
+    display_tree(1, this->root);
 }
 
 void RootTree::insertRootsFromFile(const string& filename) {
