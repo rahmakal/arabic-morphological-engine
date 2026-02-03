@@ -84,6 +84,31 @@ RootNode* RootTree::search(RootNode* node, const string& root) const {
 
     return search(node->right, root);
 }
+DerivedWord RootTree::dfs(RootNode* node, string word)
+{
+    if (node)
+    {
+        if (node->derivedWords.exists(word).word!="")
+        {
+            return node->derivedWords.exists(word);
+        }
+        if (root->left)
+        {
+            return dfs(node->left, word);
+
+        }
+        if (root->right)
+        {
+            return dfs(node->right, word);
+        }
+    }
+
+}
+
+DerivedWord RootTree::find_derived_word(RootTree tree, string word)
+{
+    return dfs(tree.root, word);
+}
 
 void RootTree::display_tree(int level, RootNode* node) const {
     if (node != NULL)

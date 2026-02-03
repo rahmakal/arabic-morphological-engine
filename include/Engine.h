@@ -3,6 +3,13 @@
 #include <string>
 #include "HashTable.h"
 using namespace std;
+#include "RootTree.h"
+
+class Engine
+{
+public:
+    void morphological_validation(RootTree* root, string word);
+};
 
 class Engine {
 public:

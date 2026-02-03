@@ -13,3 +13,17 @@ string Engine::generateWord(const string& root, const string& pattern, HashTable
     }
     return derived;
 }
+#include "Engine.h"
+
+#include "RootTree.h"
+
+void Engine::morphological_validation(RootTree tree, string word)
+{
+
+    DerivedWord derived_word = tree.find_derived_word(tree, word);
+    if (derived_word.word!="")
+    {
+        cout<<"OUI  " + derived_word.pattern;
+    }
+
+}
