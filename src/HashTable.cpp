@@ -17,7 +17,7 @@ int HashTable::find_index(string key)
     int ascii_sum = 0;
     for (auto c:wkey)
     {
-        ascii_sum+=c;
+        ascii_sum+=31*c;
     }
     return ascii_sum%16;
 }
