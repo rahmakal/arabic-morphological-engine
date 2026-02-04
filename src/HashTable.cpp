@@ -1,12 +1,12 @@
 #include "HashTable.h"
-
+#include <fstream>
 #include <codecvt>
 #include <locale>
 #include <iostream>
 using namespace std;
 
 
-HashTable::HashTable():values(16, Pattern())
+HashTable::HashTable():values(64, Pattern())
 {
 }
 
@@ -14,12 +14,16 @@ int HashTable::find_index(string key)
 {
     wstring_convert<codecvt_utf8<wchar_t>> conv;
     wstring wkey = conv.from_bytes(key);
-    int ascii_sum = 0;
+    size_t ascii_sum = 0;
     for (auto c:wkey)
     {
-        ascii_sum+=31*c;
+        ascii_sum = ascii_sum * 31 + (size_t)c;
     }
-    return ascii_sum%16;
+    ascii_sum ^= (ascii_sum >> 16);
+    ascii_sum ^= (ascii_sum >> 8);
+    int index = ascii_sum % 64;
+
+    return index;
 }
 
 void HashTable::insert(string key, Pattern value)
@@ -73,4 +77,22 @@ void HashTable::show_hash_table()
             cout<<element.transformed_word()<<endl;
         }
     }
+}
+
+void HashTable::insertPatternsFromFile(const string& filename)
+{
+    ifstream file(filename);
+    if (!file) {
+        cerr << "Error opening file: " << filename << endl;
+        return;
+    }
+
+    string pattern;
+    while (getline(file, pattern)) {
+        if (!pattern.empty()) {
+            insert(pattern, Pattern());
+        }
+    }
+
+    file.close();
 }

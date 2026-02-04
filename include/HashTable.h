@@ -13,6 +13,7 @@ public:
     void modify(string key, string new_key);
     void delete_key(string key);
     void show_hash_table();
+    void insertPatternsFromFile(const string& filename);
 private:
     vector<Pattern> values;
     int find_index(string key);
