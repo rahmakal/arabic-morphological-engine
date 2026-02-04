@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include "RootTree.h"
 #include <iostream>
 #include <string>
 
@@ -13,9 +14,6 @@ string Engine::generateWord(const string& root, const string& pattern, HashTable
     }
     return derived;
 }
-#include "Engine.h"
-
-#include "RootTree.h"
 
 void Engine::morphological_validation(RootTree tree, string word)
 {
