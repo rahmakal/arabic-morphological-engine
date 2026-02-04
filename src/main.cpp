@@ -13,10 +13,7 @@ int main() {
     hash_table.insertPatternsFromFile("../data/patterns.txt");
     hash_table.show_hash_table();
     Engine engine;
-    HashTable hashTable;
-    Pattern p = Pattern();
-    hashTable.insert("فعلت", p);
-    cout << engine.generateWord("كتب", "فعلت", hashTable) << endl;
+    cout << engine.generateWord("كتب", "تفاعال", hash_table) << endl;
 
     return 0;
 }

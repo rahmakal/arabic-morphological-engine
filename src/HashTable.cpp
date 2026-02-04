@@ -6,7 +6,7 @@
 using namespace std;
 
 
-HashTable::HashTable():values(64, Pattern())
+HashTable::HashTable():values(61, Pattern())
 {
 }
 
@@ -14,14 +14,13 @@ int HashTable::find_index(string key)
 {
     wstring_convert<codecvt_utf8<wchar_t>> conv;
     wstring wkey = conv.from_bytes(key);
-    size_t ascii_sum = 0;
+    size_t ascii_sum = 5381;
     for (auto c:wkey)
     {
-        ascii_sum = ascii_sum * 31 + (size_t)c;
+        ascii_sum = ascii_sum * 33 + (size_t)c;
     }
-    ascii_sum ^= (ascii_sum >> 16);
-    ascii_sum ^= (ascii_sum >> 8);
-    int index = ascii_sum % 64;
+
+    int index = ascii_sum % 61;
 
     return index;
 }
@@ -40,6 +39,10 @@ void HashTable::insert(string key, Pattern value)
 Pattern HashTable::search(string key)
 {
     int index = find_index(key);
+    if (values[index].transformed_word() == "")
+    {
+        cout << "Pattern not found: " << key << endl;
+    }
     return values[index];
 }
 
