@@ -2,18 +2,13 @@
 #define ENGINE_H
 #include <string>
 #include "HashTable.h"
-using namespace std;
 #include "RootTree.h"
-
-class Engine
-{
-public:
-    void morphological_validation(RootTree tree, string word);
-};
+using namespace std;
 
 class Engine {
 public:
     string generateWord(const string& root, const string& pattern, HashTable& hashTable);
+    void morphological_validation(RootTree tree, string word);
 };
 
 #endif
