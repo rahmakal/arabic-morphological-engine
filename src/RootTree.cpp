@@ -1,6 +1,7 @@
 #include "RootTree.h"
 #include <fstream>
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -108,6 +109,7 @@ RootNode* RootTree::searchRoot(const string& root) const {
 
 void RootTree::displayRoots() const {
     display_tree(1, this->root);
+    cout << endl;
 }
 
 void RootTree::insertRootsFromFile(const string& filename) {
