@@ -8,7 +8,7 @@ using namespace std;
 class Engine
 {
 public:
-    void morphological_validation(RootTree* root, string word);
+    void morphological_validation(RootTree tree, string word);
 };
 
 class Engine {
