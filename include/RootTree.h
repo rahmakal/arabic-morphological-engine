@@ -29,7 +29,7 @@ public:
     RootNode* searchRoot(const string& root) const;
     void displayRoots() const;
     void insertRootsFromFile(const string& filename);
-    DerivedWord find_derived_word(RootTree node, string word);
+    DerivedWord find_derived_word(RootTree tree, string word);
 };
 
 #endif
