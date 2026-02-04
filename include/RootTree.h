@@ -20,6 +20,7 @@ private:
     RootNode* insert(RootNode* node, const string& root);
     RootNode* search(RootNode* node, const string& root) const;
     void display_tree(int level, RootNode* node) const;
+    DerivedWord dfs(RootNode* node, string word);
 
 public:
     RootTree();
@@ -28,6 +29,7 @@ public:
     RootNode* searchRoot(const string& root) const;
     void displayRoots() const;
     void insertRootsFromFile(const string& filename);
+    DerivedWord find_derived_word(RootTree tree, string word);
 };
 
 #endif

@@ -12,12 +12,12 @@ void DerivedWordList::addWord(const string& word, const string& pattern) {
     words.emplace_back(word, pattern);
 }
 
-bool DerivedWordList::exists(const string& word) const {
-    for (const auto& w : words) {
+DerivedWord DerivedWordList::exists(const string& word) const {
+    for (DerivedWord w : words) {
         if (w.word == word)
-            return true;
+            return w;
     }
-    return false;
+    return DerivedWord("", "");
 }
 
 void DerivedWordList::display() const {

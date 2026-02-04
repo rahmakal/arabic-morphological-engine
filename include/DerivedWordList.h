@@ -14,7 +14,7 @@ private:
 
 public:
     void addWord(const string& word, const string& pattern);
-    bool exists(const string& word) const;
+    DerivedWord exists(const string& word) const;
     void display() const;
 };
 
