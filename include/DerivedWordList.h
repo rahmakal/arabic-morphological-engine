@@ -13,7 +13,7 @@ private:
     vector<DerivedWord> words;
 
 public:
-    void addWord(const string& word, const string& pattern);
+    void addWord(const string& root, const string& word, const string& pattern);
     DerivedWord exists(const string& word) const;
     void display() const;
 };

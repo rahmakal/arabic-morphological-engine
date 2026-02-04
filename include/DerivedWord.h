@@ -7,12 +7,15 @@ using namespace std;
 
 class DerivedWord {
 public:
+    string root;
     string word;
     string pattern;
     int frequency;
 
-    DerivedWord(const string& word, const string& pattern)
-        : word(word), pattern(pattern), frequency(1) {}
+    DerivedWord() : root(""), word(""), pattern(""), frequency(0) {} 
+
+    DerivedWord(const string& root, const string& word, const string& pattern)
+        : root(root), word(word), pattern(pattern), frequency(1) {}
 };
 
 #endif

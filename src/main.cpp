@@ -13,7 +13,9 @@ int main() {
     hash_table.insertPatternsFromFile("../data/patterns.txt");
     hash_table.show_hash_table();
     Engine engine;
-    cout << engine.generateWord("كتب", "تفاعال", hash_table) << endl;
-
+    engine.generateWord(tree, "كتب", "مفعول", hash_table);
+    engine.generateWord(tree, "كتب", "مفعول", hash_table);
+    engine.generateWord(tree, "كتب", "استفعل", hash_table);
+    engine.morphological_validation(tree, "مكتوب");
     return 0;
 }
