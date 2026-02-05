@@ -1,21 +1,49 @@
 #include "Engine.h"
+#include "RootTree.h"
 #include <iostream>
 #include <string>
+#include <fstream>
+#include <vector>
 
 using namespace std;
 
-string Engine::generateWord(const string& root, const string& pattern, HashTable& hashTable) {
-    Pattern p = hashTable.search(pattern);
-    string derived = "";
-    if (p.transformed_word() != ""){
-        cout << "Pattern found: " << p.transformed_word() << endl;
-        derived = p.generate_word(root);
+void Engine::generateWords(RootTree tree, const string& root, const vector<string>& patterns, HashTable& hashTable){
+    RootNode* node = tree.searchRoot(root);
+    if (node == nullptr) {
+        tree.insertRoot(root);
+        node = tree.searchRoot(root);
     }
-    return derived;
-}
-#include "Engine.h"
 
-#include "RootTree.h"
+    for (const string& pattern : patterns) {
+        Pattern p = hashTable.search(pattern);
+
+        if (p.transformed_word() != "") {
+            cout << "Generating word for pattern: " << pattern << endl;
+
+            string derived = p.generate_word(root);
+            cout << "Generated word: " << derived << endl;
+
+            node->derivedWords.addWord(root, derived, pattern);
+        }
+    }
+
+    cout << "Derived words updated for root " << root << endl;
+    node->derivedWords.display();
+}
+
+void Engine::generateMorphologicalFamily(RootTree tree, const string& root, HashTable& hashTable)
+{
+    vector<string> patterns;
+    ifstream file("../data/patterns.txt");
+
+    string pattern;
+    while (file >> pattern) {
+        patterns.push_back(pattern);
+    }
+
+    generateWords(tree, root, patterns, hashTable);
+}
+
 
 void Engine::morphological_validation(RootTree tree, string word)
 {
@@ -23,7 +51,11 @@ void Engine::morphological_validation(RootTree tree, string word)
     DerivedWord derived_word = tree.find_derived_word(tree, word);
     if (derived_word.word!="")
     {
-        cout<<"OUI  " + derived_word.pattern;
+        cout << "The word " << word << " is morphologically valid, has pattern " << derived_word.pattern << " derived from root " << derived_word.root << " with frequency " << derived_word.frequency << endl;
+    }
+    else
+    {
+        cout << "The word " << word << " is not morphologically valid." << endl;
     }
 
 }

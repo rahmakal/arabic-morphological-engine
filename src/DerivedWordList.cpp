@@ -2,14 +2,14 @@
 
 using namespace std;
 
-void DerivedWordList::addWord(const string& word, const string& pattern) {
+void DerivedWordList::addWord(const string& root, const string& word, const string& pattern) {
     for (auto& w : words) {
         if (w.word == word) {
             w.frequency++;
             return;
         }
     }
-    words.emplace_back(word, pattern);
+    words.emplace_back(root, word, pattern);
 }
 
 DerivedWord DerivedWordList::exists(const string& word) const {
@@ -17,7 +17,7 @@ DerivedWord DerivedWordList::exists(const string& word) const {
         if (w.word == word)
             return w;
     }
-    return DerivedWord("", "");
+    return DerivedWord();
 }
 
 void DerivedWordList::display() const {
