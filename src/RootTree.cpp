@@ -44,7 +44,6 @@ RootNode* RootTree::rotateLeft(RootNode* x) {
 RootNode* RootTree::insert(RootNode* node, const string& root) {
     if (!node)
         return new RootNode(root);
-
     if (root < node->root)
         node->left = insert(node->left, root);
     else if (root > node->root)

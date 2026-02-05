@@ -11,7 +11,7 @@ int main() {
     streambuf* oldCoutBuffer = cout.rdbuf();
     cout.rdbuf(out.rdbuf());
 
-    RootTree tree;
+    RootTree tree = RootTree();
     HashTable hash_table = HashTable();
     tree.insertRootsFromFile("../data/roots.txt");
     tree.displayRoots();
@@ -25,7 +25,6 @@ int main() {
     tree.displayRoots();
     engine.morphological_validation(tree, "مكتوب");
     engine.morphological_validation(tree, "أدرس");
-
     cout.rdbuf(oldCoutBuffer);
     out.close();
     return 0;

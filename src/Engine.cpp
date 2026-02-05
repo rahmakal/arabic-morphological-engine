@@ -7,13 +7,12 @@
 
 using namespace std;
 
-void Engine::generateWords(RootTree tree, const string& root, const vector<string>& patterns, HashTable& hashTable){
+void Engine::generateWords(RootTree &tree, const string& root, const vector<string>& patterns, HashTable& hashTable){
     RootNode* node = tree.searchRoot(root);
     if (node == nullptr) {
         tree.insertRoot(root);
         node = tree.searchRoot(root);
     }
-
     for (const string& pattern : patterns) {
         Pattern p = hashTable.search(pattern);
 
@@ -31,7 +30,7 @@ void Engine::generateWords(RootTree tree, const string& root, const vector<strin
     node->derivedWords.display();
 }
 
-void Engine::generateMorphologicalFamily(RootTree tree, const string& root, HashTable& hashTable)
+void Engine::generateMorphologicalFamily(RootTree &tree, const string& root, HashTable& hashTable)
 {
     vector<string> patterns;
     ifstream file("../data/patterns.txt");
