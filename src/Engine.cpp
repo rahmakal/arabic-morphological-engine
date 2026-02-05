@@ -2,27 +2,48 @@
 #include "RootTree.h"
 #include <iostream>
 #include <string>
+#include <fstream>
+#include <vector>
 
 using namespace std;
 
-void Engine::generateWord(RootTree tree, const string& root, const string& pattern, HashTable& hashTable) {
-    Pattern p = hashTable.search(pattern);
-    string derived = "";
-    if (p.transformed_word() != ""){
-        cout << "Generating word for pattern: " << p.transformed_word() << endl;
-        derived = p.generate_word(root);
-        cout << "Generated word: " << derived << endl;
-        RootNode* node = tree.searchRoot(root);
-        if(node != nullptr){
-            node->derivedWords.addWord(root, derived, pattern);
-        }else{
-            tree.insertRoot(root);
-            tree.searchRoot(root)->derivedWords.addWord(root, derived, pattern);
-        }
-        cout << "Derived words updated for root " << root << endl;
-        tree.searchRoot(root)->derivedWords.display();
+void Engine::generateWords(RootTree tree, const string& root, const vector<string>& patterns, HashTable& hashTable){
+    RootNode* node = tree.searchRoot(root);
+    if (node == nullptr) {
+        tree.insertRoot(root);
+        node = tree.searchRoot(root);
     }
+
+    for (const string& pattern : patterns) {
+        Pattern p = hashTable.search(pattern);
+
+        if (p.transformed_word() != "") {
+            cout << "Generating word for pattern: " << pattern << endl;
+
+            string derived = p.generate_word(root);
+            cout << "Generated word: " << derived << endl;
+
+            node->derivedWords.addWord(root, derived, pattern);
+        }
+    }
+
+    cout << "Derived words updated for root " << root << endl;
+    node->derivedWords.display();
 }
+
+void Engine::generateMorphologicalFamily(RootTree tree, const string& root, HashTable& hashTable)
+{
+    vector<string> patterns;
+    ifstream file("../data/patterns.txt");
+
+    string pattern;
+    while (file >> pattern) {
+        patterns.push_back(pattern);
+    }
+
+    generateWords(tree, root, patterns, hashTable);
+}
+
 
 void Engine::morphological_validation(RootTree tree, string word)
 {
